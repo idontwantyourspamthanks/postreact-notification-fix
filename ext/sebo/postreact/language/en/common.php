@@ -40,5 +40,8 @@ $lang = array_merge($lang, [
 	/* > 2.3 */
 	'SEARCH_USER_REACTIONS_RECEIVED' => 'PostReact(ions) %s received by %s',
 	'SEARCH_USER_REACTIONS'     => 'PostReact(ions) %s given by %s',
+	/* > 2.3.1h */
+	'POSTREACT_NOTIFY_MODE'         => 'Only notify me once per post',
+	'POSTREACT_NOTIFY_MODE_EXPLAIN' => 'When enabled, you will only receive one reaction notification per post. When disabled, you receive a separate notification for every reaction.',
 
 ]);

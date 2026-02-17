@@ -54,8 +54,8 @@
 
 	private function remove_reaction($user_id, $post_id, $topic_id, $icon_id)
 	{
-		// get existing icon_id and react_time
-		$sql = 'SELECT icon_id, react_time FROM ' . $this->table_prefix . 'sebo_postreact_table
+		// get existing reaction data including postreact_id for notification removal
+		$sql = 'SELECT postreact_id, icon_id, react_time FROM ' . $this->table_prefix . 'sebo_postreact_table
 				WHERE user_id = ' . (int) $user_id . '
 				AND post_id = ' . (int) $post_id;
 		$result = $this->db->sql_query($sql);
@@ -78,8 +78,8 @@
 
 		if ($result)
 		{
-			// Passa tutto al main_listener per gestire le notifiche
-			$this->main_listener->handle_postreact_notification($post_id, $topic_id, $icon_id, 'remove');
+			// Pass to main_listener for notification handling
+			$this->main_listener->handle_postreact_notification($post_id, $topic_id, $icon_id, 'remove', (int) $existing_reaction['postreact_id']);
 
 			// Get updated data
 			$reaction_data = $this->get_reaction_data($post_id);
@@ -122,9 +122,10 @@
 
 		if ($result)
 		{
+			$postreact_id = (int) $this->db->sql_nextid();
+
 			// Add notify
-			// *************************
-			$this->main_listener->handle_postreact_notification($post_id, $topic_id, $icon_id, 'add');
+			$this->main_listener->handle_postreact_notification($post_id, $topic_id, $icon_id, 'add', $postreact_id);
 
 			$reaction_data = $this->get_reaction_data($post_id);
 			$icon_data = $this->get_icon_data($icon_id);
