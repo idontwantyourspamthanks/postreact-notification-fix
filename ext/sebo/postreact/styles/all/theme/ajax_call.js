@@ -172,8 +172,11 @@ $(document).ready(function() {
                         // -------------------------
                         // Logica ADD_REACTION
                         // -------------------------
+                        var toggleBtn = $('a.react-toggle[data-target="popup-' + post_id + '"]');
+
                         if(res.action === 'added') {
-                            
+                            toggleBtn.addClass('has-reacted');
+
                             if(existingIcon.length) {
                                 // L'icona esiste già - aggiorno solo il contatore
                                 if(bubble.length) {
@@ -233,7 +236,8 @@ $(document).ready(function() {
                         // Logica REMOVE_REACTION
                         // -------------------------
                         else if(res.action === 'removed') {
-                            
+                            toggleBtn.removeClass('has-reacted');
+
                             // Usa res.icon_id (l'icona effettivamente rimossa) invece di icon_id (l'icona cliccata)
                             var removedIconId = res.icon_id;
                             var removedIcon = container.find('.img_post_react_display[data-icon-id="' + removedIconId + '"]');

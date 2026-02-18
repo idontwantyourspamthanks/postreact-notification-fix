@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Post reaction",
     "homepage": "",
-    "version": "2.3.1h",
-    "time": "2026-02-17",
+    "version": "2.3.1h1",
+    "time": "2026-02-18",
     "license": "GPL-2.0-only",
     "authors": [
         {
